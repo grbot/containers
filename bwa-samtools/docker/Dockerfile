@@ -24,4 +24,4 @@ RUN conda env create -f /environment.yml && conda clean -a
 RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
 USER ubuntu
 
-ENV PATH /usr/local/envs/samtools/bin/:$PATH
+ENV PATH /usr/local/envs/bwa-samtools/bin/:$PATH
