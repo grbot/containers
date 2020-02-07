@@ -23,6 +23,11 @@ COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
 
 RUN mkdir /var/run/munge
+ENV DRMAA_LIBRARY_PATH /cbio/soft/slurm-drmaa/lib/libdrmaa.so.1
+ENV PATH=$PATH:/cbio/soft/slurm-drmaa/bin:/opt/slurm/bin
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/cbio/soft/slurm-drmaa/lib:/opt/slurm/lib
+ENV INCLUDE=$INCLUDE:/cbio/soft/slurm-drmaa/include:/opt/slurm/include
+
 
 # Switch back to the ubuntu user so this tool (and the files written) are not owned by root
 RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
