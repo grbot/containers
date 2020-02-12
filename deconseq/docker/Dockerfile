@@ -19,12 +19,18 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN wget -q https://sourceforge.net/projects/deconseq/files/standalone/deconseq-standalone-0.4.3.tar.gz
 
+RUN wget -q https://sourceforge.net/projects/prinseq/files/standalone/prinseq-lite-0.20.4.tar.gz
+
 RUN tar -xzvf deconseq-standalone-0.4.3.tar.gz && \
     rm deconseq-standalone-0.4.3.tar.gz
+
+RUN tar -xzvf prinseq-lite-0.20.4.tar.gz && \
+    rm prinseq-lite-0.20.4.tar.gz
 
 RUN chmod +x /deconseq-standalone-0.4.3/deconseq.pl
 RUN chmod +x /deconseq-standalone-0.4.3/splitFasta.pl
 RUN chmod +x /deconseq-standalone-0.4.3/bwa64
+RUN chmod +x /prinseq-lite-0.20.4/prinseq-lite.pl
 
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
@@ -33,4 +39,4 @@ RUN conda env create -f /environment.yml && conda clean -a
 RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
 USER ubuntu
 
-ENV PATH /usr/local/envs/deconseq/bin/:/deconseq-standalone-0.4.3/:$PATH
+ENV PATH /usr/local/envs/deconseq/bin/:/deconseq-standalone-0.4.3/:/prinseq-lite-0.20.4/:$PATH
