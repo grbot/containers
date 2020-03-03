@@ -24,8 +24,8 @@ RUN conda env create -f /environment.yml && conda clean -a
 
 RUN mkdir /var/run/munge
 ENV DRMAA_LIBRARY_PATH /cbio/soft/slurm-drmaa/lib/libdrmaa.so.1
-ENV PATH=$PATH:/cbio/soft/slurm-drmaa/bin:/opt/slurm/bin
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/cbio/soft/slurm-drmaa/lib:/opt/slurm/lib
+ENV PATH=$PATH:/cbio/soft/genome-strip/svtoolkit-2.00.1949/bwa:/cbio/soft/slurm-drmaa/bin:/opt/slurm/bin
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/cbio/soft/genome-strip/svtoolkit-2.00.1949/bwa:/cbio/soft/slurm-drmaa/lib:/opt/slurm/lib
 ENV INCLUDE=$INCLUDE:/cbio/soft/slurm-drmaa/include:/opt/slurm/include
 
 
