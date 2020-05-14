@@ -72,6 +72,7 @@ make install
 # Install RepeatMasker
 RUN wget http://www.repeatmasker.org/RepeatMasker-4.1.0.tar.gz
 RUN tar -xzvf RepeatMasker-4.1.0.tar.gz
+RUN perl -MCPAN -e 'CPAN::install(Text::Soundex)'
 # Installed the following manually and then did a commit to an image
 #RUN cd RepeatMasker && \
 #perl ./configure
