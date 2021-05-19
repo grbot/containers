@@ -42,13 +42,13 @@ RUN perl -MCPAN -e 'CPAN::install(Bio::Root::Version)'
 RUN ln /usr/bin/snap-hmm /usr/bin/snap
 
 # Install Blast
-RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.10.0+-src.tar.gz
-RUN tar -xzvf ncbi-blast-2.10.0+-src.tar.gz
-RUN cd /ncbi-blast-2.10.0+-src/c++ && \
+RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.11.0+-src.tar.gz
+RUN tar -xzvf ncbi-blast-2.11.0+-src.tar.gz
+RUN cd /ncbi-blast-2.11.0+-src/c++ && \
 ./configure && \
 make && \
 make install
-ENV PATH $PATH:/ncbi-blast-2.10.0+-src/c++
+ENV PATH $PATH:/ncbi-blast-2.11.0+-src/c++
 
 # Install Exonorate
 ENV PATH $PATH:/root/.cpan/build/PkgConfig-0.23026-0/script/
