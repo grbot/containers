@@ -5,7 +5,7 @@ MAINTAINER Gerrit Botha "gerrit.botha@uct.ac.za"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Followed instructions here: https://github.com/conda/conda-docker/tree/master/miniconda3/debian
-RUN apt-get -qq update && apt-get -qq -y install libglib2.0-dev wget unzip zip libfindbin-libs-perl build-essential automake vim gcc make libexpat1-dev postgresql postgresql-server-dev-all pkg-config cpio snap \
+RUN apt-get -qq update && apt-get -qq -y install libglib2.0-dev wget unzip zip libfindbin-libs-perl build-essential automake vim gcc make libexpat1-dev postgresql postgresql-server-dev-all pkg-config cpio snap git autoconf \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log
 
 ENV PERL_MM_USE_DEFAULT 1
@@ -77,6 +77,47 @@ RUN perl -MCPAN -e 'CPAN::install(Text::Soundex)'
 #RUN cd RepeatMasker && \
 #perl ./configure
 #ENV PATH $PATH:/RepeatMasker
+
+# Install Augustus - copy and pasted from: https://github.com/Gaius-Augustus/Augustus/blob/master/Dockerfile
+# Set timezone in tzdata
+ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/Berlin"
+
+# Install required packages - added these to line 8
+#RUN apt-get update
+#RUN apt-get install -y build-essential wget git autoconf
+
+# Install dependencies for AUGUSTUS comparative gene prediction mode (CGP)
+RUN apt-get install -y libgsl-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev
+RUN apt-get install -y libsqlite3-dev libmysql++-dev
+
+# Install dependencies for the optional support of gzip compressed input files
+RUN apt-get install -y libboost-iostreams-dev zlib1g-dev
+
+# Install dependencies for bam2hints and filterBam 
+RUN apt-get install -y libbamtools-dev
+
+# Install additional dependencies for bam2wig
+RUN apt-get install -y samtools libhts-dev
+
+# Install additional dependencies for homGeneMapping and utrrnaseq
+RUN apt-get install -y libboost-all-dev
+
+# Install additional dependencies for scripts
+RUN apt-get install -y cdbfasta diamond-aligner libfile-which-perl libparallel-forkmanager-perl libyaml-perl libdbd-mysql-perl
+RUN apt-get install -y --no-install-recommends python3-biopython
+
+# Clone AUGUSTUS repository
+ADD / /root/augustus
+
+# Build AUGUSTUS
+WORKDIR "/root/augustus"
+RUN make clean
+RUN make
+RUN make install
+ENV PATH="/root/augustus/bin:/root/augustus/scripts:${PATH}"
+
+# Test AUGUSTUS
+RUN make unit_test
 
 COPY maker-3.01.02-beta.tgz /
 RUN tar -xzvf maker-3.01.02-beta.tgz
