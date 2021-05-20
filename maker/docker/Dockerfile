@@ -87,6 +87,7 @@ ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/Berlin"
 #RUN apt-get install -y build-essential wget git autoconf
 
 # Install dependencies for AUGUSTUS comparative gene prediction mode (CGP)
+RUN apt-get update
 RUN apt-get install -y libgsl-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev
 RUN apt-get install -y libsqlite3-dev libmysql++-dev
 
