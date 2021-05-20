@@ -108,6 +108,8 @@ RUN apt-get install -y cdbfasta diamond-aligner libfile-which-perl libparallel-f
 RUN apt-get install -y --no-install-recommends python3-biopython
 
 # Clone AUGUSTUS repository
+RUN git clone https://github.com/Gaius-Augustus/Augustus.git
+RUN cd Augustus
 ADD / /root/augustus
 
 # Build AUGUSTUS
