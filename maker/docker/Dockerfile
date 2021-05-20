@@ -62,9 +62,9 @@ RUN chmod +x /trf409.linux64
 RUN mv trf409.linux64 /usr/local/bin/
 
 # Install HMMER
-RUN wget http://eddylab.org/software/hmmer/hmmer.tar.gz
-RUN tar -xzvf hmmer.tar.gz
-RUN cd hmmer-3.3 && \
+RUN wget http://eddylab.org/software/hmmer/hmmer-3.3.2.tar.gz
+RUN tar -xzvf hmmer-3.3.2.tar.gz
+RUN cd hmmer-3.3.2 && \
 ./configure && \
 make && \
 make install
