@@ -114,6 +114,8 @@ ADD / /root/augustus
 
 # Build AUGUSTUS
 WORKDIR /root/augustus
+RUN pwd
+RUN ls
 #RUN make clean
 RUN make
 RUN make install
