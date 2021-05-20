@@ -115,7 +115,7 @@ ADD / /root/augustus
 # Build AUGUSTUS
 WORKDIR "/root/augustus"
 #RUN make clean
-RUN make
+RUN make augustus
 RUN make install
 ENV PATH="/root/augustus/bin:/root/augustus/scripts:${PATH}"
 
