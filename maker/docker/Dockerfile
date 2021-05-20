@@ -113,7 +113,7 @@ RUN cd Augustus
 ADD / /root/augustus
 
 # Build AUGUSTUS
-WORKDIR "/root/augustus"
+WORKDIR /root/augustus
 #RUN make clean
 RUN make augustus
 RUN make install
