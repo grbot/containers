@@ -26,6 +26,8 @@ RUN perl -MCPAN -e 'CPAN::install(XML::DOM::XPath)'
 RUN perl -MCPAN -e 'CPAN::install(DBD::Pg)'
 
 # Install custom XML-DOM-XPath
+# Download tarball from: https://www.cpan.org/modules/by-module/XML/
+# Edit file names depending on version available
 COPY XML-DOM-XPath-0.14.tar.gz /
 RUN tar -xzvf XML-DOM-XPath-0.14.tar.gz
 RUN cd /XML-DOM-XPath-0.14 && \
@@ -36,7 +38,7 @@ make install
 
 RUN perl -MCPAN -e 'CPAN::install(Bio::Root::Version)'
 
-# Install SNAP / installed from package
+# Install SNAP - already installed from package (line 8)
 #RUN wget http://korflab.ucdavis.edu/Software/snap-2013-11-29.tar.gz
 #RUN tar -xzvf snap-2013-11-29.tar.gz
 RUN ln /usr/bin/snap-hmm /usr/bin/snap
@@ -78,7 +80,7 @@ RUN perl -MCPAN -e 'CPAN::install(Text::Soundex)'
 #perl ./configure
 #ENV PATH $PATH:/RepeatMasker
 
-# Install Augustus - copy and pasted from: https://github.com/Gaius-Augustus/Augustus/blob/master/Dockerfile
+# Install Augustus - copied from: https://github.com/Gaius-Augustus/Augustus/blob/master/Dockerfile
 # Set timezone in tzdata
 ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/Berlin"
 
@@ -108,24 +110,23 @@ RUN apt-get install -y cdbfasta diamond-aligner libfile-which-perl libparallel-f
 RUN apt-get install -y --no-install-recommends python3-biopython
 
 # Clone AUGUSTUS repository
-RUN git clone https://github.com/Gaius-Augustus/Augustus.git
-RUN cd Augustus
-ADD / /root/augustus
+# Download from: https://github.com/Gaius-Augustus/Augustus
+# Unzip in build context: tar -xzvf augustus.tar.gz
+ADD Augustus /root/augustus
 
 # Build AUGUSTUS
 WORKDIR /root/augustus
-RUN pwd
-RUN ls
-#RUN make clean
-RUN make
-RUN make install
+RUN make && \ 
+make install
 ENV PATH="/root/augustus/bin:/root/augustus/scripts:${PATH}"
 
 # Test AUGUSTUS
 RUN make unit_test
 
-COPY maker-3.01.02-beta.tgz /
-RUN tar -xzvf maker-3.01.02-beta.tgz
+# Download MAKER from: http://yandell.topaz.genetics.utah.edu/cgi-bin/maker_license.cgi
+WORKDIR /
+COPY maker-3.01.03.tgz /
+RUN tar -xzvf maker-3.01.03.tgz
 RUN cd /maker/src/ && \
 perl Build.PL && \
 ./Build install
