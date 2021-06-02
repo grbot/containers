@@ -1,5 +1,5 @@
 
-FROM ubuntu:ubuntu:20.04
+FROM ubuntu:20.04
 MAINTAINER Gerrit Botha "gerrit.botha@uct.ac.za"
 
 # Followed instructions here: https://github.com/conda/conda-docker/tree/master/miniconda3/debian
