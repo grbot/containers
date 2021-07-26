@@ -44,13 +44,13 @@ RUN perl -MCPAN -e 'CPAN::install(Bio::Root::Version)'
 RUN ln /usr/bin/snap-hmm /usr/bin/snap
 
 # Install Blast
-RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.11.0+-src.tar.gz
-RUN tar -xzvf ncbi-blast-2.11.0+-src.tar.gz
-RUN cd /ncbi-blast-2.11.0+-src/c++ && \
+RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-src.tar.gz
+RUN tar -xzvf ncbi-blast-2.12.0+-src.tar.gz
+RUN cd /ncbi-blast-2.12.0+-src/c++ && \
 ./configure && \
 make && \
 make install
-ENV PATH $PATH:/ncbi-blast-2.11.0+-src/c++
+ENV PATH $PATH:/ncbi-blast-2.12.0+-src/c++
 
 # Install Exonorate
 ENV PATH $PATH:/root/.cpan/build/PkgConfig-0.23026-0/script/
@@ -79,6 +79,11 @@ RUN perl -MCPAN -e 'CPAN::install(Text::Soundex)'
 # cd RepeatMasker
 # perl ./configure
 # export PATH=$PATH:/RepeatMasker
+
+# Install EVidenceModeler
+RUN wget https://github.com/EVidenceModeler/EVidenceModeler/archive/refs/tags/v1.1.1.tar.gz
+RUN tar -xzvf v1.1.1.tar.gz
+ENV PATH $PATH:/EVidenceModeler-1.1.1
 
 # Install Augustus - copied from: https://github.com/Gaius-Augustus/Augustus/blob/master/Dockerfile
 # Set timezone in tzdata
