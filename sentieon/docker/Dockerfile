@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 LABEL maintainer="Gerrit Botha gerrit.botha@uct.ac.za"
 
 # Followed instructions here: https://github.com/conda/conda-docker/tree/master/miniconda3/debian
-RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget \
+RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget libjemalloc-dev \
     && apt-get -qq -y remove curl bzip2 \
     && apt-get -qq -y autoremove \
     && apt-get autoclean \
