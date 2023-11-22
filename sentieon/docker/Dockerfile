@@ -14,7 +14,7 @@ RUN wget -q https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics
 RUN tar -xzvf sentieon-genomics-202308.01.tar.gz && \
     rm sentieon-genomics-202308.01.tar.gz
 
-RUN mv entieon-genomics-202308.01 /opt
+RUN mv sentieon-genomics-202308.01 /opt
 
 ldconfig
 
