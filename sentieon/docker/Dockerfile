@@ -9,12 +9,12 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget libjemalloc-dev
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log
 
-RUN wget -q https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics-202112.07.tar.gz
+RUN wget -q https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics-202308.01.tar.gz
 
-RUN tar -xzvf sentieon-genomics-202112.07.tar.gz && \
-    rm sentieon-genomics-202112.07.tar.gz
+RUN tar -xzvf sentieon-genomics-202308.01.tar.gz && \
+    rm sentieon-genomics-202308.01.tar.gz
 
-RUN mv sentieon-genomics-202112.07 /opt
+RUN mv entieon-genomics-202308.01 /opt
 
 ldconfig
 
@@ -22,4 +22,4 @@ ldconfig
 RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
 USER ubuntu
 
-ENV PATH /opt/sentieon-genomics-202112.07/bin/:$PATH
+ENV PATH /opt/sentieon-genomics-202308.01/bin/:$PATH
