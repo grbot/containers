@@ -16,7 +16,7 @@ RUN tar -xzvf sentieon-genomics-202308.01.tar.gz && \
 
 RUN mv sentieon-genomics-202308.01 /opt
 
-ldconfig
+RUN ldconfig
 
 # Switch back to the ubuntu user so this tool (and the files written) are not owned by root
 RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
