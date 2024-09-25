@@ -13,8 +13,10 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log \
     && conda clean --all --yes
-    
+
+RUN wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu5.13_amd64.deb
 RUN wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/libssl1.0-dev_1.0.2n-1ubuntu5.13_amd64.deb
+RUN dpkg -i libssl1.0.0_1.0.2n-1ubuntu5.13_amd64.deb
 RUN dpkg -i libssl1.0-dev_1.0.2n-1ubuntu5.13_amd64.deb
 
 ENV PATH /opt/conda/bin:$PATH
