@@ -5,6 +5,6 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - python=3.6
-  - samtools=1.21--h50ea8bc_0
-  - bwa=0.7.18--he4a0461_1
+  - python=3.9
+  - samtools=1.21
+  - bwa=0.7.18
