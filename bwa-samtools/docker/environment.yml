@@ -6,5 +6,5 @@ channels:
   - defaults
 dependencies:
   - python=3.6
-  - samtools
-  - bwa
+  - samtools=1.21--h50ea8bc_0
+  - bwa=0.7.18--he4a0461_1
