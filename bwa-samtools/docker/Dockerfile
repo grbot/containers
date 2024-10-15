@@ -19,9 +19,7 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget zlib1g zlib1g-d
 
 ENV PATH /opt/conda/bin:$PATH
 
-COPY environment.yml /
-#RUN conda env create -f /environment.yml && conda clean -a
-RUN conda create -c bioconda -c conda-forge  --name bwa-samtools python=3.9 samtools=1.21 bwa=0.7.18 && conda clean -a
+RUN conda create -c bioconda -c conda-forge  --name bwa-samtools python=3.9 samtools=1.21 bwa=0.7.18 -y && conda clean -a
 
 # Switch back to the ubuntu user so this tool (and the files written) are not owned by root
 RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
