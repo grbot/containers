@@ -8,6 +8,7 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget libjemalloc-dev
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log
 
+# We need to trigger a reload so that the patch can be pulled
 RUN wget -q https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics-202308.02.tar.gz 
 
 RUN tar -xzvf sentieon-genomics-202308.02.tar.gz && \
