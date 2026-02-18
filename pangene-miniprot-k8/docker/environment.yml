@@ -1,0 +1,8 @@
+name: pangene
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - pangene
+  - miniprot
+  - k8
