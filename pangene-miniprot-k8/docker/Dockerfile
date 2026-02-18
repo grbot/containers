@@ -15,5 +15,10 @@ RUN micromamba create -y -n pangene -f /tmp/environment.yml \
 RUN curl -fsSL https://raw.githubusercontent.com/lh3/pangene/master/pangene.js -o /usr/local/bin/pangene.js \
  && chmod +x /usr/local/bin/pangene.js
 
-USER micromamba
+# Create non-root user (matches your usual convention)
+RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 -m ubuntu
+
+USER ubuntu
+ENV PATH=/opt/conda/envs/pangene/bin:/usr/local/bin:$PATH
+
 ENV PATH=/opt/conda/envs/pangene/bin:/usr/local/bin:$PATH
