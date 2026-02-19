@@ -3,7 +3,7 @@ FROM mambaorg/micromamba:1.5.10
 LABEL maintainer="Gerrit Botha <gerrit.botha@uct.ac.za>"
 
 USER root
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl \
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl procps  \
  && rm -rf /var/lib/apt/lists/*
 
 COPY environment.yml /tmp/environment.yml
