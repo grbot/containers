@@ -11,7 +11,7 @@ RUN apt-get -qq update && apt-get -qq -y install curl bzip2 wget libjemalloc-dev
 # We need to trigger a reload so that the patch can be pulled
 RUN wget -q https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics-202503.03.tar.gz
 
-RUN tar -xzvf sentieon-genomics-202308.03.tar.gz && \
+RUN tar -xzvf sentieon-genomics-202503.03.tar.gz && \
     rm sentieon-genomics-202503.03.tar.gz
 
 RUN mv sentieon-genomics-202503.03 /opt
